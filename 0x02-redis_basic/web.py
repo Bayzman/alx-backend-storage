@@ -34,7 +34,7 @@ def url_access_count(method):
         Returns:
             str: The HTML content of the URL.
         """
-        key = f"cached: {url}"
+        key = f"count: {url}"
         cached_value = r.get(key)
 
         if cached_value:
