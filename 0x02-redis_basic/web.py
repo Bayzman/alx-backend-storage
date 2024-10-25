@@ -34,16 +34,17 @@ def url_access_count(method):
         Returns:
             str: The HTML content of the URL.
         """
-        key = "cached:" + url
+        key = f"cached: {url}"
         cached_value = r.get(key)
+
         if cached_value:
             return cached_value.decode("utf-8")
 
         # Get new content and update cache
-        key_count = "count:" + url
+        # key_count = "count:" + url
         html_content = method(url)
 
-        r.incr(key_count)
+        r.incr(key)
         r.set(key, html_content, ex=10)
         return html_content
 
