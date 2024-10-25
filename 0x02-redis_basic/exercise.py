@@ -69,25 +69,20 @@ def replay(method: Callable) -> None:
 
 
 class Cache:
-    """
-    Cache class to interact with Redis.
-    """
-
+    """ Cache class to interact with Redis """
     def __init__(self):
-        """
-        Initialize the Cache class with a Redis connection.
-        """
+        """ Initialize the Cache class with a Redis connection """
         self._redis = redis.Redis(host='localhost', port=6379, db=0)
         self._redis.flushdb()
 
     @count_calls
     @call_history
-    def store(self, data) -> str:
+    def store(self, data: Union[str, bytes, int, float]) -> str:
         """
         Store data in Redis and return a unique key.
 
         Args:
-            data (str): The data to store.
+            data (str/bytes/int/float): The data to store.
 
         Returns:
             str: The unique key for the stored data.
